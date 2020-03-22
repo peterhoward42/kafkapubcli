@@ -8,6 +8,13 @@
 	*  CLI should probably send the messages to an message queue interface
 	*  Go routines and clean close down - don't abs need - so don't bother yet
 *  Start with recommended app template 
-o  Put in simple go makefile from umli to do linting etc
+*  Put in simple go makefile from umli to do linting etc
 o  work up from cmd
-o  add tests
+	*  hello world cmd runnable from make run
+	*  fetch config
+	o  instantiate kafka prod based on config
+	o  define a repl type with a NewRepl that takes a Producer IF arg
+	o  make the repl loop and echo input
+	o  make the repl write to kafka
+	o  make make run trigger build
+o  add tests	
