@@ -1,0 +1,13 @@
+*  Requirements
+	*  Waits for ever on terminal user input lines
+	*  Each line sent to kafka topic at host - both defined as envar
+	*  Show succes/error response in response
+*  High Level Design
+	*  Research client mo to see if needs separate go routines
+		*  Use https://github.com/segmentio/kafka-go Writer API
+	*  CLI should probably send the messages to an message queue interface
+	*  Go routines and clean close down - don't abs need - so don't bother yet
+*  Start with recommended app template 
+o  Put in simple go makefile from umli to do linting etc
+o  work up from cmd
+o  add tests
