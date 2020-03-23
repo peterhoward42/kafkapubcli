@@ -12,9 +12,11 @@
 o  work up from cmd
 	*  hello world cmd runnable from make run
 	*  fetch config
-	o  instantiate kafka prod based on config
-	o  define a repl type with a NewRepl that takes a Producer IF arg
-	o  make the repl loop and echo input
+	*  instantiate kafka prod based on config
+	*  define a repl type with a NewRepl that takes a Producer IF arg
+	*  get make targets working
+	*  make the repl loop and echo input
 	o  make the repl write to kafka
-	o  make make run trigger build
-o  add tests	
+		o  code it up to point where expect it to fail with no kafka
+	o  dockerify the app
+	o  add it to docker compose in integ test

@@ -1,6 +1,10 @@
 
 GOLANGCI_LINT_DEP=github.com/golangci/golangci-lint/cmd/golangci-lint
 
+.PHONY: run
+run: test
+run:
+	go run cmd/kafkapubcli.go
 
 .PHONY: test
 test: style
@@ -23,6 +27,4 @@ build: deps
 deps: ## Install dependencies
 	go get $(GOLANGCI_LINT_DEP)
 
-.PHONY: run
-run:
-	go run cmd/kafkapubcli.go
+

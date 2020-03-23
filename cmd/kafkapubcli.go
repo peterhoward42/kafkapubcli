@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
-	"github.com/peterhoward42/kafkapubcli/internal/pkg/kafka"
+	"github.com/peterhoward42/kafkapubcli/internal"
 )
 
 func main() {
@@ -13,10 +12,10 @@ func main() {
 	port := os.Getenv("port")
 	topic := os.Getenv("topic")
 
-	_, err := kafka.NewProducer(host, port, topic)
+	publisher, err := internal.NewKafkaPublisher(host, port, topic)
 	if err != nil {
 		log.Fatalf("NewProducer: %v", err)
 	}
-
-	fmt.Println("Hello World")
+	repl := internal.NewRepl(publisher)
+	repl.RunForever()
 }
