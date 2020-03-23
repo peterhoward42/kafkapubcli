@@ -21,7 +21,6 @@ build: deps
 
 .PHONY: deps
 deps: ## Install dependencies
-	go get
 	go get $(GOLANGCI_LINT_DEP)
 
 .PHONY: run

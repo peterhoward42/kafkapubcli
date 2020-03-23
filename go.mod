@@ -1,3 +1,5 @@
-module github.com/peterhoward42/mscomp-kafka-pub-cli
+module github.com/peterhoward42/kafkapubcli
 
 go 1.14
+
+require github.com/golangci/golangci-lint v1.24.0 // indirect
