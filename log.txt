@@ -16,7 +16,7 @@ o  work up from cmd
 	*  define a repl type with a NewRepl that takes a Producer IF arg
 	*  get make targets working
 	*  make the repl loop and echo input
-	o  make the repl write to kafka
-		o  code it up to point where expect it to fail with no kafka
-	o  dockerify the app
+	*  make the repl write to kafka
+		*  code it up to point where expect it to fail with no kafka (timeout)
+	o  dockerify the app and show it can be run locally
 	o  add it to docker compose in integ test

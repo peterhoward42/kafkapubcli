@@ -8,13 +8,12 @@ import (
 )
 
 func main() {
-	host := os.Getenv("host")
-	port := os.Getenv("port")
-	topic := os.Getenv("topic")
+	connUrl := os.Getenv("KAFKA_CONN_URL")
+	topic := os.Getenv("KAFKA_TOPIC")
 
-	publisher, err := internal.NewKafkaPublisher(host, port, topic)
+	publisher, err := internal.NewKafkaPublisher(connUrl, topic)
 	if err != nil {
-		log.Fatalf("NewProducer: %v", err)
+		log.Fatalf("NewKafkaPublisher: %v", err)
 	}
 	repl := internal.NewRepl(publisher)
 	repl.RunForever()

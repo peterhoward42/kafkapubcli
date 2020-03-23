@@ -2,19 +2,20 @@ package internal
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 )
 
-type Repl struct{}
+type Repl struct {
+	publisher Publisher
+}
 
 func (r *Repl) RunForever() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		r.publisher.Publish(scanner.Bytes())
 	}
 }
 
 func NewRepl(publisher Publisher) *Repl {
-	return &Repl{}
+	return &Repl{publisher: publisher}
 }
