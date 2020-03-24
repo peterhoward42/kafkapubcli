@@ -6,6 +6,11 @@ run: test
 run:
 	go run cmd/kafkapubcli.go
 
+.PHONY: docker
+docker: test
+docker:
+	docker build -f build/Dockerfile -t foo:1.0 .
+
 .PHONY: test
 test: style
 test:

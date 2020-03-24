@@ -21,7 +21,7 @@ o  work up from cmd
 	*  dockerify the app and show it can be run locally
 		*  with toy command
 		*  with real command
-	o  delete unwanted images
-	o  put docker build cmds into make target		
+	*  delete unwanted images
+	*  put docker build cmds into make target			
 	o  add it to docker compose in integ test
 o  how come lint stage is not moaning about connUrl?
