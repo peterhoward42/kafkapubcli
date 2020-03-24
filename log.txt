@@ -19,4 +19,17 @@ o  work up from cmd
 	*  make the repl write to kafka
 		*  code it up to point where expect it to fail with no kafka (timeout)
 	o  dockerify the app and show it can be run locally
+		*  find template
+		*  where std place to put it?
+		*  best practice for location of docker file=/build
+		*  best practice for location of main source = /cmd/appname.go
+		*  don't ignore build/
+		o  get steps to work, and capture cmd line
+		o  what does the -il do?
+		o  put comment in about how to debug
+		o  replace with real cmd
+		o  make sure built image is ignored
+		o  commit as is
+	o  delete unwanted images
+	o  put docker build cmds into make target		
 	o  add it to docker compose in integ test
