@@ -9,7 +9,7 @@ run:
 .PHONY: docker
 docker: test
 docker:
-	docker build -f build/Dockerfile -t foo:1.0 .
+	docker build -f build/Dockerfile -t kafkapubcli:1.0 .
 
 .PHONY: test
 test: style
