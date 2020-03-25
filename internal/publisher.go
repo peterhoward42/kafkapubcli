@@ -33,8 +33,7 @@ func (p *KafkaPublisher) Publish(msg []byte) {
 	defer cancel()
 	err := p.writer.WriteMessages(ctx, kmsg)
 	if err != nil {
-		log.Printf("WriteMessages: %v", err)
+		log.Printf("WriteMessages: %v\n", err)
 		return
 	}
-	log.Printf("Message written")
 }

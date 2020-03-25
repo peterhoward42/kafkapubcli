@@ -1,9 +1,6 @@
-# Derived from https://www.cloudreach.com/en/resources/blog/containerize-this-how-to-build-golang-dockerfiles/
-# Build with:
+# Build:
 #   cd <project root>
-#   docker build -f build/Dockerfile -t foo:1.0 .
-# Debug build failures with
-#   docker run -it <id_last_working_layer> sh
+#   docker build -f build/Dockerfile -t kafkapubcli:1.0 .  
 
 FROM golang:alpine as builder
 RUN mkdir /project
