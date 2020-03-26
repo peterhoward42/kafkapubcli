@@ -4,12 +4,12 @@ GOLANGCI_LINT_DEP=github.com/golangci/golangci-lint/cmd/golangci-lint
 .PHONY: run
 run: test
 run:
-	go run cmd/kafkapubcli.go
+	go run cmd/kafkapubpump.go
 
 .PHONY: docker
 docker: test
 docker:
-	docker build -f build/Dockerfile -t kafkapubcli:1.0 .
+	docker build -f build/Dockerfile -t kafkapubpump:1.0 .
 
 .PHONY: test
 test: style

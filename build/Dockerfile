@@ -1,6 +1,6 @@
 # Build:
 #   cd <project root>
-#   docker build -f build/Dockerfile -t kafkapubcli:1.0 .  
+#   docker build -f build/Dockerfile -t kafkapubpump:1.0 .  
 
 FROM golang:alpine as builder
 RUN mkdir /project
