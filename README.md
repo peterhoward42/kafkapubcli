@@ -1,1 +1,1 @@
-A console REPL that publishes what you type to a Kafka topic
+A command that publishes trivial kafka messages every few seconds.
