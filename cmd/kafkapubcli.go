@@ -1,25 +1,29 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/peterhoward42/kafkapubcli/internal"
 )
 
 func main() {
-	connUrl := os.Getenv("KAFKA_CONN_URL")
+	log.Println("Application starting")
+
+	connURL := os.Getenv("KAFKA_CONN_URL")
 	topic := os.Getenv("KAFKA_TOPIC")
+	publisher := internal.NewKafkaPublisher(connURL, topic)
 
-	log.Printf("Creating publisher\n")
-	publisher, err := internal.NewKafkaPublisher(connUrl, topic)
-	if err != nil {
-		log.Fatalf("NewKafkaPublisher: %v\n", err)
+	ticker := time.NewTicker(3 * time.Second)
+	for range ticker.C {
+		msg := []byte(fmt.Sprintf("msg at: %v", time.Now()))
+		err := publisher.Publish(msg)
+		if err != nil {
+			log.Printf("Publish: %v", err)
+		}
 	}
-	log.Printf("Creating repl\n")
-	repl := internal.NewRepl(publisher)
-	log.Printf("Launching run forever\n")
 
-	repl.RunForever()
-	log.Printf("Run forever finished, so main will exit\n")
+	log.Println("Application terminating")
 }

@@ -2,30 +2,26 @@ package internal
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"time"
 
 	kafka "github.com/segmentio/kafka-go"
 )
 
-type Publisher interface {
-	Publish(msg []byte)
-}
-
 type KafkaPublisher struct {
 	writer *kafka.Writer
 }
 
-func NewKafkaPublisher(connUrl, topic string) (*KafkaPublisher, error) {
+func NewKafkaPublisher(connUrl, topic string) *KafkaPublisher {
 	writer := kafka.NewWriter(kafka.WriterConfig{
 		Brokers:  []string{connUrl},
 		Topic:    topic,
 		Balancer: &kafka.LeastBytes{},
 	})
-	return &KafkaPublisher{writer: writer}, nil
+	return &KafkaPublisher{writer: writer}
 }
 
-func (p *KafkaPublisher) Publish(msg []byte) {
+func (p *KafkaPublisher) Publish(msg []byte) error {
 	kmsg := kafka.Message{
 		Value: msg,
 	}
@@ -33,7 +29,7 @@ func (p *KafkaPublisher) Publish(msg []byte) {
 	defer cancel()
 	err := p.writer.WriteMessages(ctx, kmsg)
 	if err != nil {
-		log.Printf("WriteMessages: %v\n", err)
-		return
+		return fmt.Errorf("writeMessages: %v", err)
 	}
+	return nil
 }
