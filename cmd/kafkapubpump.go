@@ -15,10 +15,20 @@ func main() {
 	connURL := os.Getenv("KAFKA_CONN_URL")
 	topic := os.Getenv("KAFKA_TOPIC")
 	timeout := os.Getenv("KAFKA_TIMEOUT")
+	pumpInterval := os.Getenv("PUMP_INTERVAL")
 
-	publisher := internal.NewKafkaPublisher(connURL, topic, timeout)
+	timeoutDuration, err := time.ParseDuration(timeout)
+	if err != nil {
+		log.Fatalf("Could not parse this timeout: <%s>, with error: %v", timeout, err)
+	}
+	tick, err := time.ParseDuration(pumpInterval)
+	if err != nil {
+		log.Fatalf("Could not parse this pumpInterval: <%s>, with error: %v", pumpInterval, err)
+	}
 
-	ticker := time.NewTicker(10 * time.Second)
+	publisher := internal.NewKafkaPublisher(connURL, topic, timeoutDuration)
+
+	ticker := time.NewTicker(tick)
 	for range ticker.C {
 		msg := []byte(fmt.Sprintf("msg at: %v", time.Now()))
 		err := publisher.Publish(msg)

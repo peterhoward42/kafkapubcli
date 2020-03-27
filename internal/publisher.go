@@ -3,7 +3,6 @@ package internal
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	kafka "github.com/segmentio/kafka-go"
@@ -14,11 +13,7 @@ type KafkaPublisher struct {
 	timeoutDuration time.Duration
 }
 
-func NewKafkaPublisher(connUrl, topic string, timeout string) *KafkaPublisher {
-	timeoutDuration, err := time.ParseDuration(timeout)
-	if err != nil {
-		log.Fatalf("Cannot parse this timeout string: <%s>, with error: %v", timeout, err)
-	}
+func NewKafkaPublisher(connUrl, topic string, timeout time.Duration) *KafkaPublisher {
 	writer := kafka.NewWriter(kafka.WriterConfig{
 		Brokers:  []string{connUrl},
 		Topic:    topic,
@@ -26,7 +21,7 @@ func NewKafkaPublisher(connUrl, topic string, timeout string) *KafkaPublisher {
 	})
 	return &KafkaPublisher{
 		writer:          writer,
-		timeoutDuration: timeoutDuration,
+		timeoutDuration: timeout,
 	}
 }
 
