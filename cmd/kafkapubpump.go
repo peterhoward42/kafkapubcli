@@ -14,15 +14,19 @@ func main() {
 
 	connURL := os.Getenv("KAFKA_CONN_URL")
 	topic := os.Getenv("KAFKA_TOPIC")
-	publisher := internal.NewKafkaPublisher(connURL, topic)
+	timeout := os.Getenv("KAFKA_TIMEOUT")
 
-	ticker := time.NewTicker(3 * time.Second)
+	publisher := internal.NewKafkaPublisher(connURL, topic, timeout)
+
+	ticker := time.NewTicker(10 * time.Second)
 	for range ticker.C {
 		msg := []byte(fmt.Sprintf("msg at: %v", time.Now()))
 		err := publisher.Publish(msg)
 		if err != nil {
 			log.Printf("Publish: %v", err)
+			continue
 		}
+		log.Print("Message published")
 	}
 
 	log.Println("Application terminating")
